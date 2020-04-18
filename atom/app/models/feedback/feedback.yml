@@ -1,0 +1,41 @@
+title:
+    title: Имя
+    type: string
+    require: true
+    sort: true
+    validation:
+        NotBlank:
+            message: Имя не может быть пустым
+email:
+    title: Email
+    type: string
+    require: true
+    sort: true
+    index: 1
+    validation:
+        NotBlank:
+            message: Email не может быть пустым
+        Email:
+            strict: true
+            checkHost: true
+            message: Некорректный Email
+        Regex:
+            pattern: '/^[a-z0-9\.\@\-\_]+$/i'
+            message: Email должен содержать только буквы латинского алфавита, цифры, дефис, нижнее подчервивание или точку
+phone:
+    title: Телефон
+    sort: true
+    type: string
+    index: 1
+    require: true
+    validation:
+        NotBlank:
+            message: Укажите телефон
+message:
+    title: Сообщение
+    type: text
+    index: 1
+    require: true
+    validation:
+        NotBlank:
+            message: Укажите текст сообщения

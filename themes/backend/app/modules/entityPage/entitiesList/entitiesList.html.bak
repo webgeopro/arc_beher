@@ -1,0 +1,144 @@
+<div class="page" style="position: relative;">
+  <section ng-show="isRendered()" class="panel panel-default table-dynamic">
+    <div style="position: relative;" class="panel-heading text-right">
+      <div id="table-title" style="position: absolute; left: 10px; top: 20px; font-weight: 600;"
+           data-ng-bind="tableTitle"></div>
+      <button tooltip="График статистики" tooltip-placement="top" tooltip-append-to-body="true"  ng-show="graphicsEnabled" class="btn btn-success btn-w-md listControlButtons" type="button" ng-click="goToGraphic()">
+        Статистика
+      </button>
+      <button tooltip="Добавить новый элемент" tooltip-placement="top" tooltip-append-to-body="true"  ng-show="createEnabled" class="btn btn-success btn-w-md listControlButtons" type="button" ng-click="new()">
+        Добавить
+      </button>
+      <!--go(,true);-->
+      <button tooltip="Экспорт элементов в XLS" tooltip-placement="top" tooltip-append-to-body="true"  ng-show="exportEnabled" class="btn btn-primary btn-w-md listControlButtons"
+              ng-click="exportStack();" type="button">Выгрузить
+      </button>
+      <button tooltip="Удалить выбранные элементы" tooltip-placement="top" tooltip-append-to-body="true"  ng-show="deleteEnabled" ng-disabled="isSelectItems();" class="btn btn-danger  btn-w-md listControlButtons" ng-click="deleteStack();"
+              type="button">Удалить
+      </button>
+      <form method="post" id="downloadForm"></form>
+    </div>
+    <div data-ng-show="list.scheme && hasSearchFields" class="table-filters">
+      <div class="row">
+        <div class="col-sm-4 col-xs-6">
+          <form class="ng-scope ng-pristine ng-valid">
+            <div class="input-group">
+              <input type="text"
+                     placeholder="Поиск..."
+                     class="form-control ng-pristine ng-valid"
+                     ng-model="searchKeywords"
+                     ng-keyup="keyUpHandler($event)"
+                     ng-class="{'input-danger': searchKeywordsError}"
+              >
+              <span class="input-group-addon" ng-click="search()"><i class="fa fa-search"></i></span>
+            </div>
+            <input type="hidden" value="" id="hidden-q">
+          </form>
+        </div>
+        <!--<div class="col-sm-3 col-xs-6 filter-result-info">
+            <span>
+                Showing {{filteredStores.length}}/{{stores.length}} entries
+            </span>
+        </div>-->
+      </div>
+    </div>
+
+    <div class="panel-body">
+      <section class="table-flip-scroll">
+  <table id="table-{{model}}" class="table table-bordered table-striped cf">
+    <thead class="cf">
+    <tr>
+      <th style="padding-left: 10px; height: 41px;" class="checkAll-th">
+        <div class="th" style="padding-left: 0px;padding-right: 0px;">
+          <label style="margin-right: 0;" class="ui-checkbox">
+          <input class="remAll" type="checkbox" value="" data-ng-click="selectAllItems($event);">
+          <span></span>
+        </label>
+        </div>
+      </th>
+      <th style="height: 41px;"
+          ng-repeat="(fieldKey, field) in fieldsInTable track by $index"
+          ng-if="field.sort && fieldKey !== 'enabled' ">
+        <div class="th">
+          {{field.title}}
+          <span class="arrows-sort">
+            <span ng-show="field.sort" class="fa fa-angle-up"
+                ng-click=" order(fieldKey,-1) "
+                ng-class="{active: curSortField == fieldKey && curSortOrder == -1 }"></span>
+            <span ng-show="field.sort" class="fa fa-angle-down"
+                  ng-click=" order(fieldKey,1) "
+                  ng-class="{active: curSortField == fieldKey && curSortOrder == 1 }"></span>
+          </span>
+        </div>
+      </th>
+      <th style="height: 41px;" ng-if="list.scheme.enabled && list.scheme.enabled.visible">
+        <div class="th">Доступность
+          <span class="arrows-sort">
+            <span class="fa fa-angle-up"
+                  ng-click=" order('enabled',-1) "
+                  ng-class="{active: curSortField == 'enabled' && curSortOrder == -1 }"></span>
+            <span class="fa fa-angle-down"
+                  ng-click=" order('enabled',1) "
+                  ng-class="{active: curSortField == 'enabled' && curSortOrder == 1 }"></span>
+          </span>
+        </div>
+      </th>
+      <th style="height: 41px;" class="action-th">
+        <div class="th">Действия</div>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in renderData track by $index" ng-init="last.row = $last" >
+      <td style="height: 41px;" class="testx" style="width: 15px; padding-left: 10px; padding-right: 0px;">
+        <label style="margin-right: 0;" class="ui-checkbox">
+          <input class="remBox" type="checkbox" value="{{ item._id.$id }}" ng-click="updateRemItems($event);">
+          <span></span>
+        </label>
+      </td>
+
+      <td
+        class="fieldCell"
+        style="height: 41px;"
+        list-wrapp="{{item[fieldKey]}}"
+        ng-repeat="(fieldKey, field) in fieldsInTable track by $index"
+        ng-init="last.col = $last"
+        entity-list-markup
+        entity="item[fieldKey]"
+        entity-name="fieldKey"
+        field="field" >{{::item[fieldKey]}}</td>
+
+
+      <td style="height: 41px;" class="visible-td" ng-if="list.scheme.enabled && list.scheme.enabled.visible">
+        <!--<label class="switch"  data-atom-toggle-visible="" data-model="{{model}}" data-id="{{itemId|ObjectKey:list.data}}" >-->
+        <label class="switch" data-atom-toggle-visible="" data-model="{{model}}" data-id="{{itemId}}">
+          <input type="checkbox" data-ng-model="item.enabled" ng-change="setEdited(item)">
+          <i class="slim"></i>
+        </label>
+      </td>
+      <td style="height: 41px; min-width: 85px;" class="action-td">
+        <a tooltip="Просмотр и редактирование элемента" tooltip-placement="left" tooltip-append-to-body="true"  class="btn-icon btn-icon-min-sm btn-edit" ui-sref="entityEdit({ entity: model, id: item._id.$id })">
+          <i ng-if="editEnabled" class="glyphicon glyphicon-pencil"></i>
+          <i ng-if="!editEnabled" class="fa fa-th-list"></i>
+        </a>
+        <!--<a class="btn-icon btn-icon-min-sm btn-remove cursor-pointer" data-rem-id="{{itemId|ObjectKey:list.data}}" data-ng-click="delete($event);">-->
+        <a tooltip="Удалить элемент" tooltip-placement="left" tooltip-append-to-body="left"  ng-show="deleteEnabled" class="btn-icon btn-icon-min-sm btn-remove cursor-pointer" data-rem-id="{{itemId}}"
+           data-ng-click="deleteStack(item._id['$id']);">
+          <i class="glyphicon glyphicon-trash"></i>
+        </a>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+      </section>
+    </div>
+
+    <atom-pagination data-ng-show="isRendered()"></atom-pagination>
+  </section>
+  <div data-ng-hide="isRendered()" class="form-group refresh-position">
+    <div class="col-md-12 text-center">
+      <span style="font-size: 24px" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+    </div>
+  </div>
+</div>

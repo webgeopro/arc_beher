@@ -1,0 +1,54 @@
+index.get:
+    pattern: /
+    options:
+        _controller: web\main::index
+        _title: Главная страница
+    methods: GET
+    
+index.birhday:
+    pattern: /
+    options:
+        _controller: web\main::birthday
+        _title: Главная страница
+    methods: POST
+
+page:
+    prefix: /page
+    resource: page.yml
+block:
+    prefix: /block
+    resource: block.yml
+user:
+    prefix: /user
+    resource: user.yml
+role:
+    prefix: /role
+    resource: role.yml
+setting:
+    prefix: /setting
+    resource: setting.yml
+log:
+    prefix: /log
+    resource: log.yml
+search:
+    prefix: /search
+    resource: search.yml
+
+# Feedback
+feedback:
+    prefix: /feedback
+    resource: feedback.yml
+###
+
+# Profile
+profile:
+    prefix: /profile
+    resource: profile.yml
+profile.show:
+    pattern: /p/{_id}/
+    options:
+        _controller: web\profile::show
+        _layout: frontend/lk.html
+        _title: Карточка пользователя и коктейля
+    methods: GET
+###

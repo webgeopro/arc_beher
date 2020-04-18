@@ -1,0 +1,39 @@
+atom.entity:
+    pattern: /entities/
+    options:
+        _controller: web\atom::entities
+        _title: Просмотр свойств сущностей
+    methods: GET
+
+atom.locale:
+    pattern: /locales/
+    options:
+        _controller: web\atom::locales
+        _title: Просмотр файлов локализаций
+    methods: GET
+
+atom.filemanager:
+    pattern: /filemanager/{query}
+    options:
+        _layout: null
+        _controller: web\atom::filemanager
+        _title: Проксирование запросов файлменеджера
+    methods: [GET,POST]
+    requirements:
+        query: .+
+
+atom.frontend:
+    pattern: /
+    options:
+        _controller: web\main::null
+        _title: Административная панель
+        _action: read
+    methods: GET
+
+atom.frontend.properties:
+    pattern: /properties/
+    options:
+        _controller: web\atom::properties
+        _title: Настройки административной панели
+        _action: read
+    methods: GET

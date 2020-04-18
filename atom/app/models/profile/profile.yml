@@ -1,0 +1,286 @@
+number:
+    title: Порядковый номер
+    type: integer
+    require: true
+    validation:
+        NotBlank:
+            message: Укажите порядковый номер
+surname:
+    title: Фамилия
+    type: string
+    require: true
+    sort: true
+    validation:
+        NotBlank:
+            message: Укажите фамилию
+name:
+    title: Имя
+    type: string
+    require: true
+    sort: true
+    validation:
+        NotBlank:
+            message: Укажите имя
+photofile:
+    title: Фото
+    type: image
+    require: true
+    validation:
+        NotBlank:
+            message: Укажите фото
+        Image:
+            minWidth: 600
+            minHeight: 630
+            minWidthMessage: Минимальная ширина фото 600px
+            minHeightMessage: Минимальная высота фото 630px
+collage:
+    title: Коллаж
+    type: image
+    require: true
+    validation:
+        NotBlank:
+            message: Укажите коллаж
+birthday:
+    title: Дата рождения
+    type: date
+    require: true
+    sort: true
+    validation:
+        NotBlank:
+            message: Укажите дату рождения
+city:
+    title: Город
+    type: string
+    require: true
+    sort: true
+    validation:
+        NotBlank:
+            message: Укажите город
+region:
+    title: Область
+    type: string
+    require: true
+    validation:
+        NotBlank:
+            message: Укажите область
+region_id:
+    title: ID Области
+    type: string
+    require: true
+    index: 1
+    validation:
+        NotBlank:
+            message: Укажите ID Области
+bar:
+    title: Бар
+    type: string
+    require: true
+    sort: true
+    validation:
+        NotBlank:
+            message: Укажите бар
+phone:
+    title: Телефон
+    type: string
+    require: true
+    sort: true
+    validation:
+        NotBlank:
+            message: Укажите телефон
+email:
+    title: E-mail
+    type: string
+    require: true
+    sort: true
+    validation:
+        NotBlank:
+            message: Укажите E-mail
+fb:
+    title: Профиль в Facebook
+    type: string
+    require: true
+    validation:
+        NotBlank:
+            message: Укажите профиль в Facebook
+approved:
+    title: Подтвержден профиль (FB)
+    type: boolean
+    require: true
+    index: true
+    validation:
+        Choice:
+            choices: [true, false]
+            strict: true
+            message: Не верно указана подтвержденность профиля
+        NotNull:
+            message: Не указана подтвержденность профиля
+shared:
+    title: Размещен шер (FB)
+    type: boolean
+    require: true
+    index: true
+    validation:
+        Choice:
+            choices: [true, false]
+            strict: true
+            message: Не верно указано размещение шера
+        NotNull:
+            message: Не указано размещение шера
+inst:
+    title: Профиль в Instagram
+    type: string
+    require: true
+    validation:
+        NotBlank:
+            message: Укажите профиль в Instagram
+about:
+    title: Пара слов о себе
+    type: text
+    require: true
+    validation:
+        NotBlank:
+            message: Укажите пару слов о себе
+haspass:
+    title: Наличие загранпаспорта
+    type: boolean
+    require: true
+    index: true
+    validation:
+        Choice:
+            choices: [true, false]
+            strict: true
+            message: Не верно указано наличие загранпаспорта
+        NotNull:
+            message: Не указано наличие загранпаспорта
+notrip:
+    title: Ранее не участвовал(а) в образовательной поездке
+    type: boolean
+    require: true
+    index: true
+    validation:
+        Choice:
+            choices: [true, false]
+            strict: true
+            message: Не верно указано участие в образовательной поездке
+        NotNull:
+            message: Не указано участие в образовательной поездке
+agreeprof:
+    title: Согласие на создание профиля
+    type: boolean
+    require: true
+    index: true
+    validation:
+        Choice:
+            choices: [true, false]
+            strict: true
+            message: Не верно указано согласие на создание профиля
+        NotNull:
+            message: Не указано согласие на создание профиля
+agreepers:
+    title: Согласие на сбор и обработку личных данных
+    type: boolean
+    require: true
+    index: true
+    validation:
+        Choice:
+            choices: [true, false]
+            strict: true
+            message: Не верно указано согласие на сбор и обработку личных данных
+        NotNull:
+            message: Не указано согласие на сбор и обработку личных данных
+winner:
+    title: Победитель
+    type: boolean
+    require: true
+    index: true
+    validation:
+        Choice:
+            choices: [true, false]
+            strict: true
+            message: Не верно указан победитель
+        NotNull:
+            message: Не указан победитель
+enabled:
+    title: Доступность
+    type: boolean
+    require: true
+    sort: true
+    validation:
+        Choice:
+            choices: [true, false]
+            strict: true
+            message: Не верно указана доступность
+        NotNull:
+            message: Не указана доступность
+
+
+
+caption:
+    title: Название коктейля
+    tab: cocktail
+    type: string
+    require: true
+    validation:
+        NotBlank:
+            message: Укажите название коктейля
+ingred:
+    title: Ингредиенты
+    tab: cocktail
+    type: text
+    require: true
+    validation:
+        NotBlank:
+            message: Укажите ингредиенты
+decor:
+    title: Украшение
+    tab: cocktail
+    type: text
+    require: true
+    validation:
+        NotBlank:
+            message: Укажите украшение
+glass:
+    title: Бокал
+    tab: cocktail
+    type: string
+    require: true
+    validation:
+        NotBlank:
+            message: Укажите бокал
+method:
+    title: Метод
+    tab: cocktail
+    type: string
+    require: true
+    validation:
+        NotBlank:
+            message: Укажите метод
+musetext:
+    title: Вдохновение (текст)
+    tab: cocktail
+    type: text
+    require: true
+    validation:
+        NotBlank:
+            message: Укажите вдохновение (текст)
+musephoto:
+    title: Вдохновение (картинка)
+    tab: cocktail
+    type: image
+    require: true
+    validation:
+        NotBlank:
+            message: Укажите вдохновение (картинка)
+cocktailphoto:
+    title: Фото коктейля
+    tab: cocktail
+    type: image
+    require: true
+    validation:
+        NotBlank:
+            message: Укажите фото коктейля
+        Image:
+            minWidth: 600
+            minHeight: 630
+            minWidthMessage: Минимальная ширина фото коктейля 600px
+            minHeightMessage: Минимальная высота фото коктейля 630px

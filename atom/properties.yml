@@ -1,0 +1,53 @@
+homepage: profile
+menu:
+    Блоки Сайта:
+        icon: fa-newspaper-o
+        links: [profile, feedback, block]
+    Настройки:
+        icon: fa-cogs
+        links: [user, role, setting, log]
+entities:
+    page:
+        title: Текстовые страницы
+        position: 1
+        icon: fa-file-text-o
+        tabs:
+            main: Основное
+            seo: SEO
+    block:
+        title: Текстовые блоки
+        position: 2
+        icon: fa-list-alt
+    user:
+        title: Пользователи
+        position: 3
+        icon: fa-user
+    role:
+        title: Роли
+        position: 4
+        icon: fa-users
+    setting:
+        title: Настройки
+        position: 5
+        icon: fa-wrench
+    log:
+        title: Логи
+        position: 999
+        icon: fa-tasks
+
+    # Feedback
+    feedback:
+        title: Обратная связь
+        position: 10
+        icon: fa-envelope-o
+    ###
+
+    # Profile
+    profile:
+        title: Профили
+        position: 10
+        icon: fa-smile-o
+        tabs:
+            main: Контакт
+            cocktail: Богемный коктейль
+    ###

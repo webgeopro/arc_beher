@@ -1,0 +1,33 @@
+action:
+    title: Действие
+    type: string
+    require: true
+    sort: true
+    validation:
+        NotBlank:
+            message: Действие не может быть пустым
+date:
+    title: Дата
+    type: datetime
+    require: true
+    sort: true
+user:
+    title: Пользователь
+    type: entity
+    entity:
+        model: user
+        field: title
+        filter: {}
+    default: <?$app['user']->get('_id')
+    sort: true
+ip:
+    title: IP адрес
+    type: string
+    validation:
+        Ip:
+            version: all
+            message: Неверный формат IP адреса
+url:
+    title: URL
+    type: string
+    visible: false

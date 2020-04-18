@@ -1,0 +1,16 @@
+# HTTP Statuses
+http.401: You are not logged in
+http.403: Forbidden
+http.404: Not Found
+http.500: Internal Server Error
+
+# Notifications
+user.login: Login complete
+user.restore: Request for restore password submitted.<br><br>In the near future you will be contacted.
+user.changePassword: Request for change password submitted. In the near future you will be contacted.
+user.logout: Logout complete
+user.wrong.token: Wrong token
+user.wrong.login: Wrong login or password
+user.wrong.alreadyLogin: Already logged in
+user.wrong.email: Email not given
+user.wrong.emailExists: User with this Email already signed up

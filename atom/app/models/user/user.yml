@@ -1,0 +1,59 @@
+title:
+    title: Название элемента
+    type: string
+    require: true
+    sort: true
+    search: true
+    validation:
+        NotBlank:
+            message: Название элемента не может быть пустым
+email:
+    title: Email
+    type: string
+    require: true
+    sort: true
+    search: true
+    validation:
+        NotBlank:
+            message: Email не может быть пустым
+        Email:
+            message: Некорректный Email
+        Custom:
+            expression: this.isUnique('email')
+            message: Email должен быть уникальным
+password:
+    title: Пароль
+    type: password
+    require: true
+    validation:
+        NotBlank:
+            message: Пароль не может быть пустым
+        Length:
+            min: 6
+            minMessage: Минимальная длина пароля 6 символов
+token:
+    title: Token
+    type: string
+    visible: false
+enabled:
+    title: Доступность элемента
+    type: boolean
+    require: true
+    sort: true
+    validation:
+        Choice:
+            choices: [true, false]
+            strict: true
+            message: Не верно указана доступность элемента
+        NotNull:
+            message: Не указана доступность элемента
+role:
+    title: Роль
+    type: entity
+    search: true
+    entity:
+        model: role
+        filter: {enabled: true}
+        sort: {title: 1}
+        field: title
+    multiple: true

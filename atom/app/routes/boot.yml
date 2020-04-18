@@ -1,0 +1,25 @@
+atom:
+    prefix: /atom
+    resource: atom.yml
+    defaults:
+        _layout: backend/index.html
+        _before:
+            checkPermissions: web\user::checkPermissions
+
+base:
+    prefix: /
+    resource: base.yml
+    defaults:
+        _layout: frontend/index.html
+        _before:
+            checkPermissions: web\user::checkPermissions
+        _after:
+            seo: web\page::seo
+
+undefined:
+    pattern: /{url}
+    options:
+        _controller: web\page::read
+        _layout: frontend/index.html
+    requirements:
+        url: .+

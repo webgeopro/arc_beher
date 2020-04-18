@@ -1,0 +1,1 @@
+<input autocomplete="off" id="{{ itemName }}" placeholder="" type="text" class="form-control" ng-model="field">

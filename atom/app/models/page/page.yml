@@ -1,0 +1,81 @@
+title:
+    title: Название
+    type: string
+    require: true
+    sort: true
+    search: true
+    validation:
+        NotBlank:
+            message: Название не может быть пустым
+url:
+    title: URL
+    type: url
+    require: true
+    validation:
+        Regex:
+            pattern: ~[^0-9A-Za-z\\/-_]~
+            match: false
+            message: Неверный URL
+        NotBlank:
+            message: URL не может быть пустым
+        Custom:
+            expression: this.isUnique('url')
+            message: Страница с указанным URL уже существует
+pid:
+    title: Родительская страница
+    type: entity
+    visible: false
+    default: 0
+    entity:
+        model: page
+        filter: {level: 0, enabled: true}
+        field: title
+    require: true
+    validation:
+        Regex:
+            pattern: ~[^0-9A-Za-z]~
+            match: false
+            message: Неверный родительский ID
+        Custom:
+            expression: !value or this.mongoid(value) == value
+            message: Неверный _id родительской страницы 
+level:
+    title: Уровень вложенности
+    type: integer
+    visible: false
+position:
+    title: Сортировка
+    type: integer
+    default: 0
+    placeholder: 0
+    validation:
+        Type:
+            type: integer
+            message: Неверная сортировка
+content:
+    title: Контент
+    type: html
+    search: true
+enabled:
+    title: Доступность
+    type: boolean
+    require: true
+    validation:
+        Choice:
+            choices: [true, false]
+            strict: true
+            message: Не верно указана доступность
+        NotNull:
+            message: Не указана доступность
+seo_title:
+    title: Title
+    type: string
+    tab: seo
+seo_description:
+    title: Description
+    type: string
+    tab: seo
+seo_image:
+    title: Image (1024x512)
+    type: image
+    tab: seo

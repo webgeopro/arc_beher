@@ -1,0 +1,8 @@
+
+
+    # {{Entity}}
+    {{entity}}:
+        title: {{title}}
+        position: 10
+        icon: fa-angle-right
+    ###
